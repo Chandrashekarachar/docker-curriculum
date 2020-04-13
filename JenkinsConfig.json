@@ -1,0 +1,164 @@
+{
+  "app": {
+    "appName": "docker-curriculum",
+    "namespace": "docker-curriculum",
+    "awsAcrFqdn": "aws.ecr.com",
+    "imageName": "docker-curriculum",
+    "healthCheckPath": "/",
+    "ingressPath": "/*",
+    "servicePort": "443",
+    "containerPort": "5000",
+    "livenessProbeInitialDelaySeconds": "60",
+    "livenessProbePeriodSeconds": "10",
+    "livenessProbeTimeoutSeconds": "5",
+    "livenessProbeFailureThreshold": "1",
+    "readinessProbeInitialDelaySeconds": "10",
+    "readinessProbePeriodSeconds": "10",
+    "readinessProbeTimeoutSeconds": "5",
+    "readinessProbeFailureThreshold": "5"
+  },
+  "envs": {
+    "prod1": {
+      "region": "westeurope",
+      "aks": "prod1-cluster",
+      "resourceGroup": "prod1-stack-cluster",
+      "splunk_sourcetype": "prod1-docker-curriculum",
+      "servicePrincipalId": "xxxxxxxxxxxx"
+    },
+    "prod2": {
+      "region": "northeurope",
+      "aks": "prod2-cluster",
+      "resourceGroup": "prod2-stack-cluster",
+      "splunk_sourcetype": "prod2-docker-curriculum",
+      "servicePrincipalId": "xxxxxxxxxxxx"
+    },
+    "preview1": {
+      "region": "northeurope",
+      "aks": "preview1-cluster",
+      "resourceGroup": "preview1-stack-cluster",
+      "splunk_sourcetype": "preview1-docker-curriculum",
+      "servicePrincipalId": "xxxxxxxxxxxx"
+    },
+    "preview2": {
+      "region": "westeurope",
+      "aks": "preview2-cluster",
+      "resourceGroup": "preview2-stack-cluster",
+      "splunk_sourcetype": "preview2-docker-curriculum",
+      "servicePrincipalId": "xxxxxxxxxxxx"
+    },
+    "ppe1": {
+      "region": "westeurope",
+      "aks": "ppe1-ppe",
+      "resourceGroup": "ppe1-stack-ppe",
+      "splunk_sourcetype": "ppe1-docker-curriculum",
+      "servicePrincipalId": "xxxxxxxxxxxx"
+    },
+    "qa1": {
+      "region": "northeurope",
+      "aks": "qa1-cluster",
+      "resourceGroup": "qa1-stack-qa",
+      "splunk_sourcetype": "qa1-docker-curriculum",
+      "servicePrincipalId": "xxxxxxxxxxxx"
+    }
+  },
+  "task_def": {
+    "master": {
+      "ppe": {
+        "app": {
+          "livenessProbeFailureThreshold": "5",
+          "cpuRequests": "500m",
+          "memoryRequests": "1000Mi",
+          "cpuLimits": "500m",
+          "memoryLimits": "1000Mi"
+        },
+        "env_vars": {
+          "APP_NAME": "docker-curriculum",
+          "APP_ENV": "ppe1",
+          "APPD_ACCESS_KEY": "appdynamics-access-key@awskeyvault",
+          "APPDYNAMICS_APP_NAME": "docker-curriculum",
+          "APPDYNAMICS_NODE_NAME": "docker-curriculum-ppe",
+          "APPDYNAMICS_NODE_PREFIX": "docker-curriculum-ppe",
+          "APPDYNAMICS_TIER_NAME": "docker-curriculum-ppex",
+          "CI_BRANCH_NAME": "aws",
+          "CI_VERSION": "aws",
+          "ENV_REGION": "ppe",
+          "HOST_ENV": "ppe",
+          "URL": "http://www.google.com",
+          "NODE_ENV": "production",
+          "PM2_ENV": "",
+          "SW_SIG": "aws"
+        }
+      }
+    },
+    "release": {
+      "ppe": {
+        "app": {
+          "livenessProbeFailureThreshold": "5",
+          "cpuRequests": "500m",
+          "memoryRequests": "1000Mi",
+          "cpuLimits": "500m",
+          "memoryLimits": "1000Mi"
+        },
+        "env_vars": {
+          "APP_NAME": "docker-curriculum",
+          "APP_ENV": "ppe1",
+          "APPDYNAMICS_APP_NAME": "docker-curriculum",
+          "APPDYNAMICS_NODE_NAME": "docker-curriculum-ppe",
+          "APPDYNAMICS_NODE_PREFIX": "docker-curriculum-ppe",
+          "APPDYNAMICS_TIER_NAME": "docker-curriculum-ppe",
+          "CI_BRANCH_NAME": "aws",
+          "CI_VERSION": "aws",
+          "ENV_REGION": "ppe",
+          "HOST_ENV": "ppe",
+          "URL": "http://www.google.com",
+          "NODE_ENV": "production",
+          "PM2_ENV": "",
+          "SW_SIG": "aws"
+        }
+      },
+      "preview": {
+        "app": {
+          "cpuRequests": "500m",
+          "memoryRequests": "1000Mi",
+          "cpuLimits": "500m",
+          "memoryLimits": "1000Mi"
+        },
+        "env_vars": {
+          "APP_NAME": "docker-curriculum",
+          "APP_ENV": "prod",
+          "APPD_ACCESS_KEY": "7137fa72d189",
+          "HOST_ENV": "preview",
+          "URL": "http://www.google.com",
+          "NODE_ENV": "production",
+          "PM2_ENV": "_PPE",
+          "SW_SIG": "aws"
+        }
+      },
+      "prod": {
+        "app": {
+          "cpuRequests": "1000m",
+          "memoryRequests": "7000Mi",
+          "cpuLimits": "1000m",
+          "memoryLimits": "7000Mi"
+        },
+        "env_vars": {
+          "APP_NAME": "docker-curriculum",
+          "APP_ENV": "prod",
+          "APPD_ACCESS_KEY": "7137fa72d189",
+          "APPDYNAMICS_APP_NAME": "docker-curriculum",
+          "APPDYNAMICS_NODE_NAME": "docker-curriculum-prod",
+          "APPDYNAMICS_NODE_PREFIX": "docker-curriculum-prod",
+          "APPDYNAMICS_TIER_NAME": "docker-curriculum-prod",
+          "CI_BRANCH_NAME": "aws",
+          "CI_VERSION": "aws",
+          "ENV_REGION": "prod",
+          "HOST_ENV": "production",
+          "URL": "http://www.google.com",
+          "NODE_ENV": "production",
+          "PM2_ENV": "",
+          "SW_SIG": "aws"
+        }
+      }
+    }
+  }
+}
